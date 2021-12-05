@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Snapgram</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@1.16.2/dist/full.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@1.16.2/dist/themes.css" rel="stylesheet" type="text/css" />
+  <link rel="manifest" href="/manifest.json">
+</head>
+<body>
+
+<div id="app" class="h-full">
+  <div class="rounded-lg shadow bg-base-200 drawer min-h-screen">
+    <input id="my-drawer-3" type="checkbox" class="drawer-toggle">
+    <main class="flex-grow block overflow-x-hidden bg-base-100
+      text-base-content drawer-content">
+      <div class="w-full navbar bg-white sticky top-0 z-10">
+        <div class="flex-none lg:hidden">
+          <label for="my-drawer-3" class="btn btn-square btn-ghost">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </label>
+        </div>
+        <div class="flex items-center flex-none">
+          <img class="w-40" src="./src/images/icon-extend.png" />
+        </div>
+        <div class="flex-none hidden lg:block">
+          <ul class="menu horizontal">
+            <li>
+              <a href="/" class="rounded-btn">Home</a>
+            </li>
+            <li>
+              <a href="/about" class="rounded-btn">About</a>
+            </li>
+            <li>
+              <button class="btn btn-secondary enable-notification-buttons">Enable Notification</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="p-4 lg:p-10 block md:container md:mx-auto">
+        <div id="feed-post-wrapper" class="md:grid md:grid-cols-3 md:items-center md:gap-x-5">
+          <!-- <div class="card text-left shadow-2xl mb-5">
+            <figure>
+              <img src="https://picsum.photos/id/1005/400/250" class="rounded-xl rounded-b-none">
+            </figure>
+            <div class="card-body p-5">
+              <div class="flex mb-2">
+                <svg class="fill-current text-red-400 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                </svg>
+              <p class="font-medium">Jakarta</p></div>
+              <p class="font-normal"><span class="text-black font-bold">agnesmonica</span> Rerum reiciendis beatae tenetur excepturi aut pariatur est eos. Sit sit necessitatibus veritatis sed molestiae voluptates incidunt iure sapiente.</p>
+            </div>
+          </div> -->
+          <div class="hidden" id="empty-post-wrapper">
+            <h2 class="text-center text-black text-2xl mb-5">There's nothing to see here</h2>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-red-400 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div id="loading-wrapper" class="hidden loading-wrapper-group border border-purple-200 shadow card p-4 max-w-sm w-full mx-auto mb-5">
+            <div class="animate-pulse">
+              <div class="w-full bg-purple-100 h-40 mb-5"></div>
+              <div>
+                <div class="h-4 bg-purple-100 rounded w-1/4 mb-2"></div>
+                <div class="h-4 bg-purple-100 rounded mb-2"></div>
+                <div class="h-4 bg-purple-100 rounded mb-2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fixed hidden inset-0 overflow-hidden z-10" aria-labelledby="slide-over-title"
+      role="dialog" aria-modal="true" id="form-post-container">
+        <div class="absolute inset-0 overflow-hidden">
+          <div class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+          <div class="fixed inset-y-0 right-0 pl-10 max-w-full flex">
+            <div class="relative w-screen max-w-md">
+              <div class="absolute top-0 left-0 -ml-8 pt-4 pr-2 flex sm:-ml-10 sm:pr-4">
+                <button type="button" class="rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
+                  id="btn-close-post">
+                  <span class="sr-only">Close panel</span>
+                  <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              <div class="h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll">
+                <div class="px-4 sm:px-6">
+                  <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">
+                    Post
+                  </h2>
+                </div>
+                <div class="mt-6 relative flex-1 px-4 sm:px-6">
+                  <!-- Replace with your content -->
+                  <div class="absolute inset-0 px-4 sm:px-6">
+                    <video class="rounded-md mb-5" id="player" autoplay></video>
+                    <canvas class="hidden mb-5 w-full rounded-md h-auto" id="canvas"></canvas>
+                    <div class="flex mb-5">
+                      <button id="btn-capture" class="btn btn-sm btn-primary mr-5">
+                        Capture
+                      </button>
+                      <button id="btn-flip" class="btn btn-sm btn-accent">
+                        Flip
+                      </button>
+                    </div>
+
+                    <button id="btn-retake" class="hidden btn btn-sm btn-primary mb-5">
+                      Retake
+                    </button>
+                    <div class="hidden" id="pick-image">
+                      <h6>Pick an Image instead</h6>
+                      <input type="file" accept="image/*" id="image-picker">
+                    </div>
+                    <form>
+                      <div class="mb-5">
+                        <label for="username" class="text-sm font-medium text-gray-900 block mb-2">Username</label>
+                        <input type="text" id="username"
+                          class="bg-gray-50 border border-gray-300 text-gray-900 mb-3 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                          required=""></input>
+                      </div>
+                      <div class="mb-5">
+                        <label for="caption" class="text-sm font-medium text-gray-900 block mb-2">Caption</label>
+                        <textarea type="text" id="caption"
+                          class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                          required="" rows="5"></textarea>
+                      </div>
+                      <div class="mb-10">
+                        <label for="location" class="text-sm font-medium text-gray-900 block mb-2">Location</label>
+                        <input type="text" id="location"
+                          class="bg-gray-50 border border-gray-300 text-gray-900 mb-3 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                          required=""></input>
+                        <button type="button" id="btn-location" class="btn btn-sm btn-primary">Get location</button>
+                      </div>
+                      <button type="submit" class="btn btn-lg btn-info mx-auto w-full">
+                        POST
+                      </button>
+                    </form>
+                  </div>
+                  <!-- /End replace -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button id="btn-add-post" class="fixed z-0 bottom-5 right-2.5 p-0 w-12 h-12 bg-red-600 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
+        <svg viewBox="0 0 20 20" enable-background="new 0 0 20 20" class="w-6 h-6 inline-block">
+              <path fill="#FFFFFF" d="M16,10c0,0.553-0.048,1-0.601,1H11v4.399C11,15.951,10.553,16,10,16c-0.553,0-1-0.049-1-0.601V11H4.601
+              C4.049,11,4,10.553,4,10c0-0.553,0.049-1,0.601-1H9V4.601C9,4.048,9.447,4,10,4c0.553,0,1,0.048,1,0.601V9h4.399
+              C15.952,9,16,9.447,16,10z" />
+            </svg>
+      </button>
+      <div id="toast-wrapper" class="fixed bottom-5 hidden left-5 flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+        <div class="flex items-center justify-center w-12 bg-green-500">
+          <svg
+            class="w-6 h-6 text-white fill-current"
+            viewBox="0 0 40 40"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z"
+            />
+          </svg>
+        </div>
+
+        <div class="px-4 py-2 -mx-3">
+          <div class="mx-3">
+            <span class="font-semibold text-green-500 dark:text-green-400">Success</span>
+            <p id="toast-message" class="text-sm text-gray-600 dark:text-gray-200"></p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div class="drawer-side">
+      <label for="my-drawer-3" class="drawer-overlay"></label>
+      <ul class="p-4 overflow-y-auto menu w-80 bg-base-100">
+        <img class="w-40" src="./src/images/icon-extend.png" />
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/about">About</a>
+        </li>
+        <li>
+          <button class="btn btn-secondary enable-notification-buttons">Enable Notification</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<script src="/src/js/idb.js"></script>
+<script src="/src/js/utility.js"></script>
+<script src="/src/js/app.js"></script>
+<script src="/src/js/feed.js"></script>
+</body>
+</html>

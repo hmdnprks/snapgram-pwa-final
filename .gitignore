@@ -1,0 +1,7 @@
+.idea
+node_modules
+
+/.firebase
+.firebaserc
+
+.DS_Store

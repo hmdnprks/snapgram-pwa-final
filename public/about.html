@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Snapgram</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@1.16.2/dist/full.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@1.16.2/dist/themes.css" rel="stylesheet" type="text/css" />
+  <link rel="manifest" href="/manifest.json">
+</head>
+<body>
+
+<div id="app" class="h-full">
+  <div class="rounded-lg shadow bg-base-200 drawer min-h-screen">
+    <input id="my-drawer-3" type="checkbox" class="drawer-toggle">
+    <main class="flex-grow block overflow-x-hidden bg-base-100
+      text-base-content drawer-content">
+      <div class="w-full navbar bg-white sticky top-0 z-10">
+        <div class="flex-none lg:hidden">
+          <label for="my-drawer-3" class="btn btn-square btn-ghost">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </label>
+        </div>
+        <div class="flex items-center flex-none">
+          <img class="w-40" src="./src/images/icon-extend.png" />
+        </div>
+        <div class="flex-none hidden lg:block">
+          <ul class="menu horizontal">
+            <li>
+              <a href="/" class="rounded-btn">Home</a>
+            </li>
+            <li>
+              <a href="/about" class="rounded-btn">About</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="p-4 lg:p-10 block md:container md:mx-auto">
+        <div class="md:grid md:grid-cols-3 md:items-center md:gap-x-5">
+          <h2>This is only about page. Nothing to do here</h2>
+        </div>
+      </div>
+    </main>
+    <div class="drawer-side">
+      <label for="my-drawer-3" class="drawer-overlay"></label>
+      <ul class="p-4 overflow-y-auto menu w-80 bg-base-100">
+        <img class="w-40" src="./src/images/icon-extend.png" />
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/about">About</a>
+        </li>
+        <li>
+          <button class="btn btn-secondary">Enable Notification</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>
